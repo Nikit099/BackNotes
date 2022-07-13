@@ -14,6 +14,8 @@ document.addEventListener("click", (e) => {
     };
     edit(id, JSON.stringify(newNote));
   }
+  if (e.target.dataset.type === "update") {
+  }
 });
 async function remove(id) {
   await fetch(`/${id}`, { method: "DELETE" });

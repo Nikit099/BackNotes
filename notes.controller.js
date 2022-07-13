@@ -7,6 +7,7 @@ async function addNote(title) {
   const note = {
     title,
     id: Date.now().toString(),
+    update: false,
   };
   notes.push(note);
   await fs.writeFile(notesPath, JSON.stringify(notes));
