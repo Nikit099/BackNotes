@@ -1,5 +1,10 @@
 const yargs = require("yargs");
-const { addNote, printNotes, removeNote } = require("./notes.controller.js");
+const {
+  addNote,
+  printNotes,
+  removeNote,
+  editNote,
+} = require("./notes.controller.js");
 yargs.command({
   command: "add",
   describe: "Add new note to list",
@@ -32,5 +37,12 @@ yargs.command({
     removeNote(String(id));
   },
 });
+yargs.command({
+  command: "edit",
+  describe: "Edit note by id",
 
+  handler({ id, title }) {
+    editNote(String(id), title);
+  },
+});
 yargs.parse();

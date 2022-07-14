@@ -29,8 +29,15 @@ async function removeNote(id) {
   const newNotes = notes.filter((note) => note.id !== id);
   await fs.writeFile(notesPath, JSON.stringify(newNotes));
 }
+async function editNote(id, title) {
+  const notes = await getNotes();
+  notes[notes.findIndex((i) => i.id === id)].title = title;
+  await fs.writeFile(notesPath, JSON.stringify(notes));
+}
+
 module.exports = {
   addNote,
   printNotes,
   removeNote,
+  editNote,
 };
