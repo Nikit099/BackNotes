@@ -7,7 +7,6 @@ async function addNote(title) {
   const note = {
     title,
     id: Date.now().toString(),
-    update: false,
   };
   notes.push(note);
   await fs.writeFile(notesPath, JSON.stringify(notes));
@@ -30,14 +29,10 @@ async function removeNote(id) {
   const newNotes = notes.filter((note) => note.id !== id);
   await fs.writeFile(notesPath, JSON.stringify(newNotes));
 }
-async function editNote(newNote) {
+async function editNote(index, newTitle) {
   const notes = await getNotes();
-  const newNotes = notes.map((i) =>
-    Number(i.id) === Number(newNote.id)
-      ? { ...i, title: newNote.title }
-      : { ...i }
-  );
-  await fs.writeFile(notesPath, JSON.stringify(newNotes));
+  notes[index].title = newTitle;
+  await fs.writeFile(notesPath, JSON.stringify(notes));
 }
 module.exports = {
   addNote,

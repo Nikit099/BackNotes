@@ -25,22 +25,28 @@
     </form>
     <% if(notes.length) { %> 
     <div class="card">
+        <form action="/" method="put"  >
         <ul class="list-group ">
             <% for (let i = 0; i < notes.length; i++)  { %> 
+              
             <li class="list-group-item d-flex justify-content-between">
-                <%= notes[i].title %> 
-                <div>
-                    <% if(notes[i].update) {%>
-                        <button class="btn btn-success" data-type='save' data-id="<%= notes[i].id %> ">Save</button>
-                        <button class="btn btn-danger" data-type='cancel' data-id="<%= notes[i].id %> ">Cancel</button>
-                    <% }else {%> 
-                        <button class="btn btn-primary" data-type='update' data-id="<%= notes[i].id %> ">Update</button>
-                        <% } %>  
-                    <button class="btn btn-danger" data-type='remove' data-id="<%= notes[i].id %> ">&times;</button>
+                <div class="textBlock">
+                    <%= notes[i].title %> 
+                </div>
+                <input class="textInp" style="display: none;" required value="<%= notes[i].title %>" name="title"/>
+                  
+              
+                <div class="blockBtn">
+                    <button class="btn btn-primary update" data-type='update' type="button" data-id="<%= notes[i].id %> ">Update</button>
+                    <button class="btn btn-danger remove" data-type='remove' type="button" data-id="<%= notes[i].id %> ">&times;</button>
+                    <button class="btn btn-success Cancel" data-type='save' type="submit" data-index = '<%= i %>' style="display: none;">Save</button>
+                    <button class="btn btn-danger Cancel" data-type='cancel' type="button" style="display: none;" >Cancel</button>
                 </div>
             </li>
+        
             <% } %> 
         </ul>
+    </form>
     </div>
   <% } else { %> 
     <p>Notes doesnt exsist </p>
